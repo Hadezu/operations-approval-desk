@@ -11,4 +11,14 @@
 
 ![Preserved decision history](images/history.png)
 
-The short recording is the real automated browser journey; the guide above is a manual walkthrough. A separate database test races requests concurrently, rather than relying only on two sequential browser submissions. A separate process-death test verifies rollback. Browser traces are not published because authenticated traces can contain session credentials; the published video/screenshots contain synthetic content only.
+The short recording follows Bob's actual review session; the guide above describes the complete multi-user walkthrough. Carol's stale decision is captured separately:
+
+![Second reviewer cannot overwrite the decision](images/stale-decision.png)
+
+A separate database test races requests concurrently, rather than relying only on two sequential browser submissions. A separate process-death test verifies rollback. Browser traces are not published because authenticated traces can contain session credentials; the published video/screenshots contain synthetic content only.
+
+<details><summary>Mobile review screen (Chromium emulation)</summary>
+
+![Mobile decision history](images/mobile.png)
+
+</details>

@@ -1,0 +1,4 @@
+{% load static %}<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{% block title %}Operations Approval Desk{% endblock %}</title><link rel="stylesheet" href="{% static 'desk.css' %}"></head>
+<body><header><a class="brand" href="/">AD<span>Approval Desk<small>OPERATIONS / INDEPENDENT ENGINEERING</small></span></a>{% if user.is_authenticated %}<div class="identity"><span>{{ user.username }}</span><form action="/logout/" method="post">{% csrf_token %}<button class="quiet">Sign out</button></form></div>{% endif %}</header>
+<main>{% block content %}{% endblock %}</main><footer>Independent work by Ivan Matiushkin with Codex · Synthetic operational requests · No external system is changed.<br>Built with Django and PostgreSQL. Approval records a decision; it does not execute the proposed change.</footer></body></html>

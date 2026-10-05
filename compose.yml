@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:18.6
+    environment:
+      POSTGRES_DB: ${PGDATABASE:?Run scripts/configure.py first}
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+    volumes:
+      - approval-data:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  web:
+    build: .
+    env_file: .env
+    environment:
+      PGHOST: db
+      PGPORT: '5432'
+    ports: ['127.0.0.1:8187:8187']
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  approval-data:

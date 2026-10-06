@@ -29,9 +29,9 @@ Expired workspaces become inaccessible immediately. Physical deletion happens on
 
 The existing audit trigger still rejects every UPDATE and all DELETEs for normal teams or active demos. Migration 0004 permits DELETE only for events whose team belongs to an already expired `DemoWorkspace`, checked by PostgreSQL time. Cleanup does not disable triggers. The database owner remains trusted and can override database protections; hashes are not signatures. A dedicated disposable demo database is required.
 
-## Free hosting candidate, checked 2026-10-06
+## Free hosting, deployed and checked 2026-10-06
 
-**Render Free web service + Neon Free PostgreSQL**, in nearby European regions where available. Both must remain on Free plans with no payment method / paid upgrade. Account creation, provider access and deployment verification are separate from a checked-in configuration; this document does not assert a live deployment.
+**Render Free web service + Neon Free PostgreSQL**, both in Frankfurt. [English demo](https://operations-approval-desk.onrender.com/demo/en/) · [Polish demo](https://operations-approval-desk.onrender.com/demo/pl/). Both were configured on Free plans; no payment method or paid upgrade was added. Manual deployment is enabled (Auto-Deploy Off). The live release and verification scope are recorded in [PUBLIC-DEMO-VERIFICATION.md](PUBLIC-DEMO-VERIFICATION.md).
 
 - Render sleeps after 15 minutes without traffic; waking can take about a minute. It can restart, suspend on quota, and does not provide a paid-service availability guarantee.
 - Render's own free PostgreSQL expires after 30 days, so it is not the proposed database.

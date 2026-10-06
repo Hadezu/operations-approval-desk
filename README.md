@@ -1,5 +1,13 @@
 # Operations Approval Desk
 
+<!-- portfolio-navigation:start -->
+[← Project index](https://github.com/Hadezu#selected-implementations) · [Internal applications](https://work.matiushkin.com/en/services/internal-applications) · [Describe a similar task](https://work.matiushkin.com/en/contact?example=services%2Finternal-applications)
+
+**Review format:** Live guided demo: [English](https://operations-approval-desk.onrender.com/demo/en/) / [Polski](https://operations-approval-desk.onrender.com/demo/pl/). Synthetic role switching; local authenticated mode is also included.
+
+[Related interactive example](https://work.matiushkin.com/en/workflow-access) — a separate portfolio demonstration of the same problem.
+<!-- portfolio-navigation:end -->
+
 [![Verify](https://github.com/Hadezu/operations-approval-desk/actions/workflows/verify.yml/badge.svg)](https://github.com/Hadezu/operations-approval-desk/actions/workflows/verify.yml)
 
 **Two reviewers open the same request. One approves it. The other rejects the old version. Which decision survives?**

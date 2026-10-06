@@ -82,3 +82,11 @@ jobs:
           name: approval-desk-evidence-py${{ matrix.python }}
           path: test-results/
           retention-days: 14
+  required:
+    # Preserve the existing protected-branch check name while requiring both matrix jobs.
+    name: verify
+    needs: verify
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: test '${{ needs.verify.result }}' = 'success'

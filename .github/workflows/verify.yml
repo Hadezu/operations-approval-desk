@@ -10,6 +10,10 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.12', '3.14']
     timeout-minutes: 15
     services:
       postgres:
@@ -36,7 +40,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
-          python-version: '3.14'
+          python-version: ${{ matrix.python }}
       - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
         with:
           version: '0.12.23'
@@ -75,6 +79,14 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
-          name: approval-desk-evidence
+          name: approval-desk-evidence-py${{ matrix.python }}
           path: test-results/
           retention-days: 14
+  required:
+    # Preserve the existing protected-branch check name while requiring both matrix jobs.
+    name: verify
+    needs: verify
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: test '${{ needs.verify.result }}' = 'success'

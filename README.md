@@ -8,20 +8,9 @@ A runnable Django/PostgreSQL internal tool: scoped accounts, an operational revi
 
 Independent engineering work by **Ivan Matiushkin with Codex**. All examples are synthetic. Approval changes this application's workflow record only; it does not execute a warehouse, import or financial operation.
 
-## Watch the demonstration
-
-Recorded local approval workflow with synthetic accounts and data.
-
-https://github.com/user-attachments/assets/b3396697-107c-47d9-805c-73a22bf30d00
-
-<details>
-<summary>View a still frame</summary>
-
 ![Actual review queue](docs/images/queue.png)
 
-</details>
-
-[Download original recording](docs/images/approval-demo.webm) · [Market fit and case study](docs/CASE-STUDY.md) · [Architecture and boundaries](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Portfolio/email wording](docs/COMMERCIAL-USAGE.md)
+[Market fit and case study](docs/CASE-STUDY.md) · [Architecture and boundaries](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Portfolio/email wording](docs/COMMERCIAL-USAGE.md)
 
 ## What a reviewer can verify
 
@@ -107,3 +96,12 @@ This is an independent demonstration, not a SaaS or certified approval system. C
 The local setup uses one database owner for simplicity. The append-only trigger prevents ordinary update/delete; the database owner can disable it or alter data. Hashes are content fingerprints, not signatures. Team scope is enforced by application queries, not PostgreSQL row-level security. See the architecture document for concurrency and identity-administration boundaries.
 
 [Portfolio](https://work.matiushkin.com/en) · [GitHub](https://github.com/Hadezu) · ivan@matiushkin.com
+
+<details>
+<summary>Technical verification recording</summary>
+
+Original test recording retained as supporting evidence. For the scenario, results and limitations, see the verification documentation above.
+
+[Download the original recording](docs/images/approval-demo.webm)
+
+</details>

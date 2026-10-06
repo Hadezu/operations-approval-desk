@@ -60,6 +60,8 @@ jobs:
         run: |
           uv run python -m scripts.serve > test-results/server.log 2>&1 &
           uv run python scripts/browser_check.py
+      - name: Public guided journeys EN/PL desktop/mobile
+        run: uv run python scripts/public_browser_check.py
       - name: Container smoke
         run: |
           uv run python scripts/configure.py

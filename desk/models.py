@@ -86,3 +86,35 @@ class Event(models.Model):
                 name="one_command_per_actor_team",
             ),
         ]
+
+
+class DemoWorkspace(models.Model):
+    """Disposable synthetic tenant; its capability stays in the server session."""
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    team = models.OneToOneField(Team, on_delete=models.PROTECT)
+    expires_at = models.DateTimeField(db_index=True)
+    attempts = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class DemoActor(models.Model):
+    workspace = models.ForeignKey(DemoWorkspace, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    label = models.CharField(max_length=20)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["workspace", "label"], name="demo_actor_label"
+            )
+        ]
+
+
+class DemoBudget(models.Model):
+    """One persistent lock/counter row. Session clearing cannot reset this budget."""
+
+    hour = models.CharField(max_length=13, default="")
+    day = models.CharField(max_length=10, default="")
+    hourly_starts = models.PositiveIntegerField(default=0)
+    daily_starts = models.PositiveIntegerField(default=0)

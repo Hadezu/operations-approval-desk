@@ -1,0 +1,4 @@
+{% extends 'desk/demo_base.html' %}{% block content %}<section class="intro"><p class="eyebrow">{{ code }}</p><h1>{{ c.error }}</h1><p role="alert">{{ error }}</p><a href="{% url 'demo-home' locale=locale %}">{{ c.back }} →</a></section>
+{% if retained %}<section class="panel"><p>{{ c.retained }}</p><form action="{% url 'demo-command' locale=locale %}" method="post">{% csrf_token %}
+{% for key, value in retained.items %}<label>{{ key }}<textarea name="{{ key }}" rows="2" {% if not editable or key != 'reason' and key != 'title' and key != 'proposal' %}readonly{% endif %}>{{ value }}</textarea></label>{% endfor %}
+{% if retryable %}<button>{{ c.retry }}</button>{% endif %}</form></section>{% endif %}{% endblock %}

@@ -76,7 +76,8 @@ def home(request, locale="en"):
         events = list(record.events.all())
         for event in events:
             event.state_label = ctx["c"][event.after_state]
-            event.role_label = ctx["c"][event.actor_role]
+            label = event.actor_name.rsplit("-", 1)[-1]
+            event.role_label = ctx["c"].get(label, ctx["c"][event.actor_role])
         ctx.update(
             workspace=workspace,
             record=record,
@@ -177,6 +178,7 @@ def evidence(request, locale):
             rows = list(
                 record.events.values(
                     "version",
+                    "actor_name",
                     "actor_role",
                     "action",
                     "before_state",

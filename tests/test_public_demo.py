@@ -232,3 +232,23 @@ def test_start_failure_rolls_back_budget_and_partial_users(client):
     assert not DemoActor.objects.exists()
     assert not DemoBudget.objects.filter(daily_starts__gt=0).exists()
     assert not get_user_model().objects.filter(username__startswith="demo-").exists()
+
+
+def test_owned_reset_reuses_last_active_slot(client, settings):
+    settings.DEMO_ACTIVE_LIMIT = 1
+    previous, _ = begin(client)
+    fresh, _ = begin(client)
+    assert fresh.pk != previous.pk
+    assert DemoWorkspace.objects.filter(expires_at__gt=timezone.now()).count() == 1
+    assert Client().post("/demo/en/start/").status_code == 429
+
+
+def test_second_reviewer_identity_is_preserved_in_evidence(client):
+    _, record = begin(client)
+    post(client, record, "submit", 1)
+    client.post("/demo/en/role/", {"role": "second_reviewer"})
+    post(client, record, "approve", 2)
+    rows = client.get("/demo/en/evidence.json").json()["events"]
+    assert rows[-1]["actor_name"].endswith("-second_reviewer")
+    assert rows[-1]["actor_role"] == "reviewer"
+    assert b"Second reviewer" in client.get("/demo/en/").content

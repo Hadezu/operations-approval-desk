@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
         BEGIN
             IF TG_OP = 'DELETE' AND EXISTS (
                 SELECT 1 FROM desk_demoworkspace
-                WHERE team_id = OLD.team_id AND expires_at <= CURRENT_TIMESTAMP
+                WHERE team_id = OLD.team_id AND expires_at <= clock_timestamp()
             ) THEN
                 RETURN OLD;
             END IF;

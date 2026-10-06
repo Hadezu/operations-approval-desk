@@ -59,19 +59,20 @@ def start(session, locale):
     daily = budget.daily_starts if budget.day == day else 0
     if hourly >= settings.DEMO_STARTS_HOUR or daily >= settings.DEMO_STARTS_DAY:
         raise Rejected("DEMO_QUOTA", 429)
-    if (
-        DemoWorkspace.objects.filter(expires_at__gt=now).count()
-        >= settings.DEMO_ACTIVE_LIMIT
-    ):
+    # Reset replaces an owned active slot; it does not consume a second one.
+    try:
+        previous = workspace_for(session, lock=True)
+    except Rejected:
+        previous = None
+    active = DemoWorkspace.objects.filter(expires_at__gt=now)
+    if previous:
+        active = active.exclude(pk=previous.pk)
+    if active.count() >= settings.DEMO_ACTIVE_LIMIT:
         raise Rejected("DEMO_QUOTA", 429)
     budget.hour, budget.day = hour, day
     budget.hourly_starts, budget.daily_starts = hourly + 1, daily + 1
     budget.save()
     # Only the capability already owned by this session can be expired by reset.
-    try:
-        previous = workspace_for(session, lock=True)
-    except Rejected:
-        previous = None
     if previous:
         previous.expires_at = now
         previous.save(update_fields=["expires_at"])

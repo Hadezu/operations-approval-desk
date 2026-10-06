@@ -8,9 +8,20 @@ A runnable Django/PostgreSQL internal tool: scoped accounts, an operational revi
 
 Independent engineering work by **Ivan Matiushkin with Codex**. All examples are synthetic. Approval changes this application's workflow record only; it does not execute a warehouse, import or financial operation.
 
+## Watch the demonstration
+
+Recorded local approval workflow with synthetic accounts and data.
+
+https://github.com/user-attachments/assets/b3396697-107c-47d9-805c-73a22bf30d00
+
+<details>
+<summary>View a still frame</summary>
+
 ![Actual review queue](docs/images/queue.png)
 
-[Recorded demonstration](docs/images/approval-demo.webm) · [Market fit and case study](docs/CASE-STUDY.md) · [Architecture and boundaries](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Portfolio/email wording](docs/COMMERCIAL-USAGE.md)
+</details>
+
+[Download original recording](docs/images/approval-demo.webm) · [Market fit and case study](docs/CASE-STUDY.md) · [Architecture and boundaries](docs/ARCHITECTURE.md) · [Verification](docs/VERIFICATION.md) · [Portfolio/email wording](docs/COMMERCIAL-USAGE.md)
 
 ## What a reviewer can verify
 

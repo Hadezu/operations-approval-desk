@@ -25,7 +25,9 @@ https://github.com/user-attachments/assets/b3396697-107c-47d9-805c-73a22bf30d00
 
 ## What a reviewer can verify
 
-There is also a **guided EN/PL public-demo mode**: isolated 20-minute synthetic workspaces, role switching, real database decisions and evidence export, without a shared login. See [public-demo setup, free hosting candidate and limitations](docs/PUBLIC-DEMO.md). A deployment configuration is included; no live URL is claimed until hosting is verified.
+**Try the live guided demo: [English](https://operations-approval-desk.onrender.com/demo/en/) · [Polski](https://operations-approval-desk.onrender.com/demo/pl/).** No shared login: each visitor starts an isolated 20-minute synthetic workspace with role switching, real database decisions and evidence export. Free hosting can take about a minute to wake up. Use synthetic text only.
+
+See [public-demo architecture and hosting limits](docs/PUBLIC-DEMO.md) and [local/CI versus live verification](docs/PUBLIC-DEMO-VERIFICATION.md). This public walkthrough demonstrates server-enforced workflow behavior, not identity onboarding or adoption by real employees.
 
 | Situation | Observable behavior |
 | --- | --- |

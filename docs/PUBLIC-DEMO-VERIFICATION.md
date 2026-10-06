@@ -19,4 +19,18 @@ No performance/load benchmark, physical iPhone/Safari test, penetration test or 
 
 ## Deployment state
 
-Render Free + Neon Free selected as a candidate. The owner signed in; a separate Neon Free project was created in Frankfurt. Render setup is still in progress. `render.yaml` and the runbook are prepared; **live deployment has not been verified**. No paid plan was enabled, no customer data used and the portfolio production site was not changed by this increment. GitHub publication and CI status are reported separately from runtime availability.
+**LIVE_VERIFIED on 2026-10-06.** [English](https://operations-approval-desk.onrender.com/demo/en/) · [Polski](https://operations-approval-desk.onrender.com/demo/pl/).
+
+- Runtime release: `705247f2e2173a6929f704f9e259eb2be5870082`; compared with the tested public-demo release `3753d73`, only README changed.
+- Render service: `srv-db2bpruk1f9s739t829g`; deployment: `dep-db2bpsmk1f9s739t8ajg`.
+- Render reported Deploy succeeded at 2026-10-06 09:19:47 UTC; database migrations 0001–0004 succeeded and the service became live.
+- Render Free (0.1 CPU, 512 MB) and a separate Neon Free PostgreSQL 18 database, both Frankfurt. Auto-Deploy Off; `/health/` health check. No paid plan or payment method was added.
+- Secrets are server environment variables; no credentials are committed. TLS database connection and secure session/CSRF cookies are enabled.
+
+### Current live checks
+
+At 09:23 UTC, independent HTTP sessions exercised both EN and PL: start → submit → reviewer approval → evidence export, with real PostgreSQL persistence. Both passed. Repeating the same approval returned the existing result with no additional event; the stale-version experiment returned 409; an auditor write returned 403; anonymous evidence access was blocked; a POST without CSRF returned 403. Exports contained three events and were `no-store`. `/health/` returned 200; classic `/login/` was unavailable (404). Contact links preserved the existing internal-applications example context.
+
+In live Chrome, the EN journey was also completed using keyboard navigation: Draft v1 → Awaiting review v2 → Approved v3, with a server receipt and three visible history records. A screenshot was inspected. This confirms the interface journey, independently of the HTTP checks.
+
+The EN/PL desktop/mobile automated browser matrix remains the local/CI verification described above. Physical iPhone/Safari, production mobile interaction, long-term availability and load testing were not newly verified during this deployment. The free instance sleeps; a first visit may take about a minute. The role switcher is a synthetic guided demonstration, not a public customer identity system. No customer data or external business operation was used. The portfolio production site was not modified by this deployment.

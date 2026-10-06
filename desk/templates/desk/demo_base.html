@@ -1,0 +1,10 @@
+{% load static %}<!doctype html>
+<html lang="{{ locale }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Operations Approval Desk · Demo</title>
+<link rel="stylesheet" href="{% static 'desk/demo.css' %}"></head>
+<body><header><a href="{% url 'demo-home' locale=locale %}" class="brand">AD <span>Operations Approval Desk</span></a>
+<nav aria-label="Language"><a href="{% url 'demo-home' locale='en' %}" lang="en" {% if locale == 'en' %}aria-current="page"{% endif %}>EN</a><a href="{% url 'demo-home' locale='pl' %}" lang="pl" {% if locale == 'pl' %}aria-current="page"{% endif %}>PL</a></nav></header>
+<main>{% block content %}{% endblock %}</main>
+<footer><p>{{ c.scope }}</p><p>{{ c.limits }}</p><a href="https://github.com/Hadezu/operations-approval-desk">{{ c.source }} ↗</a>
+<p>{{ c.next }} <a href="https://work.matiushkin.com{{ contact }}">{{ c.contact }} →</a></p></footer></body></html>

@@ -14,6 +14,8 @@ Independent engineering work by **Ivan Matiushkin with Codex**. All examples are
 
 ## What a reviewer can verify
 
+There is also a **guided EN/PL public-demo mode**: isolated 20-minute synthetic workspaces, role switching, real database decisions and evidence export, without a shared login. See [public-demo setup, free hosting candidate and limitations](docs/PUBLIC-DEMO.md). A deployment configuration is included; no live URL is claimed until hosting is verified.
+
 | Situation | Observable behavior |
 | --- | --- |
 | User requests another team's record or evidence | HTTP 404, no record content |
@@ -24,7 +26,7 @@ Independent engineering work by **Ivan Matiushkin with Codex**. All examples are
 | Same command key carries different content | Conflict; no mutation |
 | Audit insert fails or process dies before commit | State and event both roll back |
 | Rejected proposal is revised | New version; old proposal and rejection remain inspectable |
-| Someone updates/deletes audit rows through ordinary SQL | PostgreSQL trigger rejects the write |
+| Someone updates/deletes audit rows through ordinary SQL | Trigger rejects mutations; only expired disposable demo tenants permit deletion for cleanup |
 | Approved proposal is edited | Transition rejected; approved requests are closed |
 
 This strengthens the existing [Workflow & Access](https://work.matiushkin.com/en/workflow-access) and internal-tools service. It adds real authenticated writes and database behavior to the portfolio's scenario-based permission proof. It is not a new service category or a claim of paid Django delivery history.
@@ -87,7 +89,7 @@ Django provides authentication, sessions, CSRF, autoescaped templates, ORM and m
 
 ## Deliberate boundaries
 
-This is a local demonstration, not an internet-ready SaaS or certified approval system. No SSO/MFA, login throttling, external notifications, attachments, multi-stage approval builder, background execution, production backup/restore or load benchmark. Before hosting: separate migration/runtime database roles, HTTPS, secure cookies, operational monitoring and a deployment-specific security review are required.
+This is an independent demonstration, not a SaaS or certified approval system. Classic password-login mode remains intended for local use. Public mode is a bounded synthetic sandbox with separate routes, quotas and expiry; see its [deployment boundaries](docs/PUBLIC-DEMO.md). No SSO/MFA, external notifications, attachments, multi-stage approval builder, background execution, production backup/restore or load benchmark. Before real business use: separate migration/runtime database roles, identity hardening, operational monitoring and a deployment-specific security review are required.
 
 The local setup uses one database owner for simplicity. The append-only trigger prevents ordinary update/delete; the database owner can disable it or alter data. Hashes are content fingerprints, not signatures. Team scope is enforced by application queries, not PostgreSQL row-level security. See the architecture document for concurrency and identity-administration boundaries.
 

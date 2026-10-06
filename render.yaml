@@ -1,0 +1,35 @@
+# Free web service only. Neon Free supplies PostgreSQL separately.
+# Do not add a payment method or upgrade plans without an explicit decision.
+services:
+  - type: web
+    name: operations-approval-desk
+    runtime: docker
+    plan: free
+    region: frankfurt
+    healthCheckPath: /health/
+    autoDeployTrigger: "off"
+    envVars:
+      - key: PUBLIC_DEMO
+        value: "1"
+      - key: HTTPS_ONLY
+        value: "1"
+      - key: TRUST_HTTPS_PROXY
+        value: "1"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: PGSSLMODE
+        value: require
+      - key: PGPORT
+        value: "5432"
+      - key: PGHOST
+        sync: false
+      - key: PGDATABASE
+        sync: false
+      - key: PGUSER
+        sync: false
+      - key: PGPASSWORD
+        sync: false
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false

@@ -11,4 +11,4 @@ RUN useradd --create-home desk && chown -R desk:desk /app
 USER desk
 ENV BIND_HOST=0.0.0.0
 EXPOSE 8187
-CMD ["sh", "-c", "uv run --no-dev manage.py migrate --noinput && uv run --no-dev manage.py collectstatic --noinput && uv run --no-dev python -m scripts.serve"]
+CMD ["sh", "-c", "uv run --no-dev manage.py migrate --noinput && uv run --no-dev manage.py cleanup_demo && uv run --no-dev manage.py collectstatic --noinput && uv run --no-dev python -m scripts.serve"]

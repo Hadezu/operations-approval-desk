@@ -67,3 +67,16 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 16384
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 12
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
+PUBLIC_DEMO = os.environ.get("PUBLIC_DEMO") == "1"
+DEMO_STARTS_HOUR = 20
+DEMO_STARTS_DAY = 60
+DEMO_ACTIVE_LIMIT = 20
+DEMO_ACTION_LIMIT = 50
+if os.environ.get("PGSSLMODE"):
+    DATABASES["default"]["OPTIONS"]["sslmode"] = os.environ["PGSSLMODE"]
+# Enable only behind a trusted TLS-terminating proxy (e.g. Render).
+if os.environ.get("TRUST_HTTPS_PROXY") == "1":
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+CSRF_TRUSTED_ORIGINS = [
+    value for value in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if value
+]

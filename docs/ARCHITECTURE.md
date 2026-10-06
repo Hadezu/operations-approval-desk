@@ -40,7 +40,7 @@ Tests use separate PostgreSQL connections to race approve/reject and duplicate d
 
 ## Evidence boundary
 
-The database rejects `UPDATE`/`DELETE` on events through a trigger. This is append-only behavior for ordinary writes, **not tamper-proof storage**: a database owner can disable triggers, truncate or fabricate records. The demonstration runtime/migrator shares an owner account. Production separation of privileges is not implemented here.
+The database rejects all `UPDATE`s and normal `DELETE`s on events through a trigger. The only deletion exception is an already expired, explicitly disposable public demo tenant (migration 0004); normal teams and active demos remain protected. See [public-demo boundaries](PUBLIC-DEMO.md). This is append-only behavior for ordinary writes, **not tamper-proof storage**: a database owner can disable triggers, truncate or fabricate records. The demonstration runtime/migrator shares an owner account. Production separation of privileges is not implemented here.
 
 Content hashes make proposal equality inspectable, not authentic. They are not chained signatures. Event snapshots retain the actor's name/role at the decision even if membership later changes. Evidence export derives its head from the single event query, avoiding a separately read newer state paired with older history. This is a statement-consistent export, not a cryptographic attestation.
 

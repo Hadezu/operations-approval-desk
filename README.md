@@ -1,20 +1,19 @@
-# Operations Approval Desk
+# Operations Approval Desk — accountable team decisions
+
+Give operations teams a review queue with scoped access, preserved proposal history and downloadable evidence. Exact-version decisions reject stale approvals before they overwrite another reviewer’s work.
 
 <!-- portfolio-navigation:start -->
 [← Project index](https://github.com/Hadezu#selected-implementations) · [Internal applications](https://work.matiushkin.com/en/services/internal-applications) · [Describe a similar task](https://work.matiushkin.com/en/contact?example=services%2Finternal-applications)
 
-**Review format:** Live guided demo: [English](https://operations-approval-desk.onrender.com/demo/en/) / [Polski](https://operations-approval-desk.onrender.com/demo/pl/). Synthetic role switching; local authenticated mode is also included.
 
 [Related interactive example](https://work.matiushkin.com/en/workflow-access) — a separate portfolio demonstration of the same problem.
 <!-- portfolio-navigation:end -->
 
 [![Verify](https://github.com/Hadezu/operations-approval-desk/actions/workflows/verify.yml/badge.svg)](https://github.com/Hadezu/operations-approval-desk/actions/workflows/verify.yml)
 
-**Two reviewers open the same request. One approves it. The other rejects the old version. Which decision survives?**
+**Concurrent reviewers get a clear outcome: the first valid decision is retained; stale decisions are rejected.**
 
-A runnable Django/PostgreSQL internal tool: scoped accounts, an operational review queue, exact-version decisions, preserved proposal history and downloadable evidence. The second stale decision is rejected instead of silently overwriting the first.
-
-Independent engineering work by **Ivan Matiushkin with Codex**. All examples are synthetic. Approval changes this application's workflow record only; it does not execute a warehouse, import or financial operation.
+**Stack:** Django and PostgreSQL. The review queue connects team-scoped accounts to versioned decisions and downloadable evidence.
 
 ![Actual review queue](docs/images/queue.png)
 
@@ -113,3 +112,10 @@ Original test recording retained as supporting evidence. For the scenario, resul
 [Download the original recording](docs/images/approval-demo.webm)
 
 </details>
+
+
+## Discuss a similar project
+
+I develop complete applications, integrations and focused improvements to existing software. Send the workflow you want to improve and the outcome you need; we can define the scope, delivery stages and acceptance checks together.
+
+**[Discuss your project](https://work.matiushkin.com/en/contact)** · [More implementations](https://github.com/Hadezu) · [Project context and verification scope](PRESENTATION-SCOPE.md)
